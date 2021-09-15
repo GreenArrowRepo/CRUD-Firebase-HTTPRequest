@@ -12,7 +12,7 @@ export class ManageProductsComponent implements OnInit {
    
   }
   //dataTitle = this.serverService.getDataTitle();
-  products = [
+  products : any = [
     {
       id: 'p1',
       name:'Laptop',
@@ -35,21 +35,23 @@ export class ManageProductsComponent implements OnInit {
     },
   ]
 
-  onAddProduct(id: { value: any; }, name: { value: any; }, price: { value: any; }){
+  onAddProduct(idd: { value: string; }, namea : any, prices : any)
+  {
     this.products.push({
-      id: id.value,
-      name:name.value,
-      price: price.value,
+      id : idd.value,
+      name:namea.value,
+      price: prices.value,
       
     })
-    console.log(this.products)
+    console.log("inside onAddProducts")
   }
   onSaveProduct(){
-   /*  this.serverService.addProducts(this.products)
+    this.serverService.saveProducts(this.products)
       .subscribe(
         (response: any) => console.log(response),
         (err: any) => console.log(err) 
-      ) */
+      ) 
+      console.log("inside onSaveProducts")
   }
 
   onFetchProduct(){

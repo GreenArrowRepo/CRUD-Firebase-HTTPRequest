@@ -17,6 +17,10 @@ export class ServerService {
     return this.http.put(this.url, products);
   }
 
+  saveProducts(productsReceived : any[])
+  {
+   return this.http.post(this.url, productsReceived)
+  }
   
 
 

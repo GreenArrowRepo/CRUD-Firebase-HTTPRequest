@@ -1,0 +1,67 @@
+<br>
+<div class="container">
+ <!-- <alert type="success">
+    <strong>Well done!</strong> You successfully read this important alert message.
+  </alert>-->
+  <div class="row">
+    <div class="col-md-8 ">
+      <form>
+        <div class="form-group">
+          <label for="id">Product Id</label>
+          <input type="text" class="form-control" id="id" #idd>
+          <!-- <small class="form-text text-muted">Enter Product Id</small> -->
+        </div>
+        <div class="form-group">
+          <label for="name">Product Name</label>
+          <input type="text" class="form-control" id="name" #names>
+          <!-- <small class="form-text text-muted">Enter Product Name</small> -->
+        </div>
+        <div class="form-group">
+          <label for="price">Product Price</label>
+          <input type="text" class="form-control" id="price" #pricce>
+          <!-- <small class="form-text text-muted">Enter Product Price</small> -->
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="onAddProduct(idd, names, pricce)">Add Product</button>
+
+        <button type="submit" class="btn btn-primary" (click)="onSaveProduct()">Save Product</button>
+
+        <button type="submit" class="btn btn-primary" (click)="onFetchProduct()">Fetch Product</button>
+      </form>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="row">
+    <div class="col-md-8">
+      <!-- <h2>{{dataTitle | async}}</h2> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>

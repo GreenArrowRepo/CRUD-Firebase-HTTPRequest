@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ServerService } from 'src/app/appServices/server.service';
 
 @Component({
@@ -15,6 +15,11 @@ export class ManageProductsComponent implements OnInit {
   }
 
   fetching = false;
+  editMode : boolean =false;
+  editIndex:number =0;
+  @ViewChild('idd')id!: ElementRef;
+  @ViewChild('names') name:ElementRef | any;
+  @ViewChild('pricce') price:ElementRef | any;
 
   dataTitle = this.serverService.getDataTitle();
   products : any = [
@@ -42,13 +47,33 @@ export class ManageProductsComponent implements OnInit {
 
   onAddProduct(idd: { value: string; }, namea : any, prices : any)
   {
-    this.products.push({
-      id : idd.value,
-      name:namea.value,
-      price: prices.value,
-      
-    })
-    console.log("inside onAddProducts")
+
+    if(this.editMode)
+    {
+        this.products[this.editIndex] = {
+          id : idd.value,
+          name:namea.value,
+          price: prices.value,  
+        }
+        this.editMode = false;
+        this.id.nativeElement.value = '';
+    this.name.nativeElement.value = '';
+    this.price.nativeElement.value = '';
+    this.onSaveProduct();
+    }
+    
+    else
+    {
+      this.products.push({
+        id : idd.value,
+        name:namea.value,
+        price: prices.value,
+        
+      })
+      console.log("inside onAddProducts")
+    }
+
+    
   }
   onSaveProduct(){
     this.serverService.saveProducts(this.products)
@@ -58,6 +83,7 @@ export class ManageProductsComponent implements OnInit {
       ) 
       console.log("inside onSaveProducts")
   }
+
 
   onFetchProduct(){
     this.fetching =  true
@@ -70,5 +96,19 @@ export class ManageProductsComponent implements OnInit {
     },
     (err : any)=> console.log(err)
   )
+  }
+
+  onEditProduct(i : any)
+  {
+    this.editMode = true;
+    this.editIndex = i;
+    this.id.nativeElement.value = this.products[i].id;
+    this.name.nativeElement.value = this.products[i].name;
+    this.price.nativeElement.value = this.products[i].price;
+  }
+
+  onDeleteProduct(i : any)
+  {
+    console.log("i " + i)
   }
 }

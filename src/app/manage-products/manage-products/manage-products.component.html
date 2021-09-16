@@ -8,21 +8,21 @@
       <form>
         <div class="form-group">
           <label for="id">Product Id</label>
-          <input type="text" class="form-control"  #idd>
+          <input type="text" class="form-control" id="id"  #idd>
           <!-- <small class="form-text text-muted">Enter Product Id</small> -->
         </div>
         <div class="form-group">
           <label for="name">Product Name</label>
-          <input type="text" class="form-control"  #names>
+          <input type="text" class="form-control" id="name"  #names>
           <!-- <small class="form-text text-muted">Enter Product Name</small> -->
         </div>
         <div class="form-group">
           <label for="price">Product Price</label>
-          <input type="text" class="form-control" #pricce>
+          <input type="text" class="form-control" id="price" #pricce>
           <!-- <small class="form-text text-muted">Enter Product Price</small> -->
         </div>
 
-        <button type="button" class="btn btn-primary" (click)="onAddProduct(idd, names, pricce)">Add Product</button>
+        <button type="button" class="btn btn-primary" (click)="onAddProduct(idd, names, pricce)">{{editMode ? 'Update Product' : 'Add Product'}}</button>
 
         <button type="button" class="btn btn-primary" (click)="onSaveProduct()">Save Product</button>
 
@@ -47,7 +47,9 @@
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
+            <th scope="col" class="text-center">Edit</th>
             <th scope="col" class="text-center">Delete</th>
+            
           </tr>
         </thead>
         <tbody *ngIf="!fetching">
@@ -56,14 +58,19 @@
             <td>{{product.id}}</td>
             <td>{{product.name}}</td>
             <td>{{product.price}}</td>
-            <td class="text-center"><a class="text-danger"><i class="far fa-trash-alt"></i></a></td>
+            <td class="text-center" (click)="onEditProduct(i)"><a href="#">Edit</a></td>
+
+            <td class="text-center" (click)="onDeleteProduct(i)"><a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
+              <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
+            </svg></a></td>
+            
             
           </tr>
         </tbody>
       </table>
       <div *ngIf="fetching" class="text-center">
       <div  class="spinner-border text-secondary" role="status">
-        <span class="visually-hidden">Loading...</span>
+        <span class="visually-hidden"></span>
       </div>
     </div>
     </div>

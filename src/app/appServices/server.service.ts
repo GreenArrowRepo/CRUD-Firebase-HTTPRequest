@@ -19,9 +19,18 @@ export class ServerService {
 
   saveProducts(productsReceived : any[])
   {
-   return this.http.post(this.url, productsReceived)
+   return this.http.put(this.url, productsReceived)
+  }
+
+  fetchProducts()
+  {
+    return this.http.get(this.url)
   }
   
+  getDataTitle()
+  {
+    return this.http.get("https://crud-httprequest-exercis-1-default-rtdb.asia-southeast1.firebasedatabase.app/tableTitle.json")
+  }
 
 
 

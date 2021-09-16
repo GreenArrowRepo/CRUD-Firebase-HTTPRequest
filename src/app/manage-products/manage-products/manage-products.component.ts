@@ -6,14 +6,19 @@ import { ServerService } from 'src/app/appServices/server.service';
   templateUrl: './manage-products.component.html',
   styleUrls: ['./manage-products.component.css']
 })
+
+
 export class ManageProductsComponent implements OnInit {
   constructor(private serverService : ServerService ) { }
   ngOnInit(): void {
-   
+    this.onFetchProduct()
   }
-  //dataTitle = this.serverService.getDataTitle();
+
+  fetching = false;
+
+  dataTitle = this.serverService.getDataTitle();
   products : any = [
-    {
+   /*  {
       id: 'p1',
       name:'Laptop',
       price: 45000
@@ -32,7 +37,7 @@ export class ManageProductsComponent implements OnInit {
       id: 'p4',
       name:'Mobile',
       price: 8500
-    },
+    }, */
   ]
 
   onAddProduct(idd: { value: string; }, namea : any, prices : any)
@@ -55,9 +60,15 @@ export class ManageProductsComponent implements OnInit {
   }
 
   onFetchProduct(){
-
+    this.fetching =  true
+    this.serverService.fetchProducts().subscribe(
+    (response : any) => {
+      const data = JSON.stringify(response)
+      this.products = JSON.parse(data)
+      this.fetching = false;
+    
+    },
+    (err : any)=> console.log(err)
+  )
   }
-
- 
- 
 }
